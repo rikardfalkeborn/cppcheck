@@ -393,8 +393,28 @@ static const Token *getCastTypeStartToken(const Token *parent)
 static void setTokenValueCast(Token *parent, const ValueType &valueType, const ValueFlow::Value &value, const Settings *settings);
 
 /** set ValueFlow value and perform calculations if possible */
-static void setTokenValue(Token* tok, const ValueFlow::Value &value, const Settings *settings)
+static void setTokenValue(Token* tok, const ValueFlow::Value &v, const Settings *settings)
 {
+    ValueFlow::Value value(v);
+    // Handle unsigned wraparound
+    if (tok->variable() && tok->variable()->valueType()->sign == ValueType::Sign::UNSIGNED) {
+
+        size_t sizeofTok = ValueFlow::getSizeOf(*tok->variable()->valueType(), settings);
+        // Only perform wraparound calculations if the size is known, and the size is smaller
+        // than value.intvalue to avoid issues with integer overflow
+        if (sizeofTok != 0 && sizeofTok < sizeof(value.intvalue)) {
+            long long max_val = 1LL << (settings->char_bit * sizeofTok);
+            if (value.intvalue < 0) {
+                long long n = 1 + (-value.intvalue / max_val);
+                value.intvalue += n * max_val;
+            }
+            else if (value.intvalue > max_val) {
+                long long n = value.intvalue / max_val;
+                value.intvalue -= max_val * n;
+            }
+        }
+    }
+
     if (!tok->addValue(value))
         return;
 

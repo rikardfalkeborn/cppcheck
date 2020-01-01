@@ -156,7 +156,7 @@ private:
         return false;
     }
 
-    bool testValueOfX(const char code[], unsigned int linenr, int value) {
+    bool testValueOfX(const char code[], unsigned int linenr, long long value) {
         // Tokenize..
         Tokenizer tokenizer(&settings, this);
         std::istringstream istr(code);
@@ -2034,6 +2034,25 @@ private:
                "}\n";
         ASSERT_EQUALS(false, testValueOfX(code, 6U, 3));
         TODO_ASSERT_EQUALS(true, false, testValueOfX(code, 6U, 2));
+
+        // Unsigned wrap, 8306
+        code = "void f() {\n"
+               "   unsigned int x = 0;\n"
+               "   x -= 10;\n"
+               "}";
+        ASSERT_EQUALS(true, testValueOfX(code, 3U, (1ULL << settings.int_bit) - 10));
+
+        code = "unsigned char f() {\n"
+               "   unsigned char x = 0;\n"
+               "   x -= 1020;\n"
+               "}";
+        ASSERT_EQUALS(true, testValueOfX(code, 3U, 4));
+
+        code = "unsigned char f() {\n"
+               "   unsigned char x = 0;\n"
+               "   x += 1028;\n"
+               "}";
+        ASSERT_EQUALS(true, testValueOfX(code, 3U, 4));
     }
 
     void valueFlowAfterCondition() {
