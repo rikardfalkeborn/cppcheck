@@ -1188,7 +1188,7 @@ private:
               "void f(int x) {\n"
               "  if (x && x != ZERO) {}\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[test.cpp:3] -> [test.cpp:3]: (style) Condition 'x!=0' is always true\n", errout.str());
     }
 
     void incorrectLogicOperator5() { // complex expressions

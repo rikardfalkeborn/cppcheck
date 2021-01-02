@@ -4488,41 +4488,41 @@ void valueFlow(void)
 
     // When adding functions below, please sort alphabetically.
 
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(strlen(abc) == 3);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(abs(three) == 3);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(abs(minusThree) == 3);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(isblank(blank) == 1);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(isblank(tab) == 1);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(isblank(c0) == 0);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(isdigit(c0) == 1);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(isdigit(ca) == 0);
 
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(iswblank(wblank) == 1);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(iswblank(wtab) == 1);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(iswblank(w0) == 0);
 
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(iswdigit(w0) == 0);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(iswdigit(wtab) == 1);
 
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(labs(three) == 3);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(labs(minusThree) == 3);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(llabs(three) == 3);
-    // TODO cppcheck-suppress knownConditionTrueFalse
+    // cppcheck-suppress knownConditionTrueFalse
     AssertAlwaysTrue(llabs(minusThree) == 3);
 }

@@ -1434,25 +1434,7 @@ void CheckCondition::alwaysTrueFalse()
                 continue;
 
             // Don't warn when there are expanded macros..
-            bool isExpandedMacro = false;
-            visitAstNodes(tok, [&](const Token * tok2) {
-                if (!tok2)
-                    return ChildrenToVisit::none;
-                if (tok2->isExpandedMacro()) {
-                    isExpandedMacro = true;
-                    return ChildrenToVisit::done;
-                }
-                return ChildrenToVisit::op1_and_op2;
-            });
-            if (isExpandedMacro)
-                continue;
-            for (const Token *parent = tok; parent; parent = parent->astParent()) {
-                if (parent->isExpandedMacro()) {
-                    isExpandedMacro = true;
-                    break;
-                }
-            }
-            if (isExpandedMacro)
+            if (tok->isExpandedMacro())
                 continue;
 
             // don't warn when condition checks sizeof result
